@@ -3,8 +3,9 @@
 void setup() {
   // setupStepperDefault();
 
-  short motorPins[8] = { 3, 5, 6, 7, 8, 9, 10, 11 };  
-  setupStepper(motorPins);
+  short motor1Pins[4] = { 3, 5, 6, 7 };  
+  short motor2Pins[4] = { 8, 9, 10, 11 };  
+  setupStepper(motor1Pins, motor2Pins);
 
 }
 

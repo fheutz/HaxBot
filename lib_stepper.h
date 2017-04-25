@@ -1,6 +1,7 @@
 #include <AccelStepper.h>
 #define HALFSTEP 8
 
+
 // motor pins for left motor
 #define defaultMotorPin1  4     // IN1 on the ULN2003 driver 1
 #define defaultMotorPin2  5     // IN2 on the ULN2003 driver 1
@@ -15,7 +16,6 @@
 
 
 // Initialize with pin sequence IN1-IN3-IN2-IN4 for using the AccelStepper with 28BYJ-48
-//AccelStepper STEPPER1(HALFSTEP, motorPin1, motorPin3, motorPin2, motorPin4);
 AccelStepper STEPPER1;
 AccelStepper STEPPER2;
 
@@ -28,31 +28,34 @@ int STEPS2 = 0; // keep track of the step count for motor 2
 
 
 /*
- * methods
+ * method definitins
+ */
+void initializeStepper(AccelStepper * stepper);
+void setupStepper(int motorPins[]);
+void setupStepperDefault();
+void executeMove();
+void moveStepper(AccelStepper *stepper, int target);
+void moveStepper1(int target);
+void moveStepper2(int target);
+void moveForward(int distance);
+void moveBackward(int distance);
+void turnLeft(int distance);
+void turnRight(int distance);
+
+
+
+/*
+ * constructor(s)
  */
 
- void setupStepper(int motorPins[]) {
-  short motorPin1 = motorPins[0];
-  short motorPin2 = motorPins[1];
-  short motorPin3 = motorPins[2];
-  short motorPin4 = motorPins[3];
-  short motorPin5 = motorPins[4];
-  short motorPin6 = motorPins[5];
-  short motorPin7 = motorPins[6];
-  short motorPin8 = motorPins[7];
-  
-  STEPPER1 = AccelStepper(HALFSTEP, motorPin1, motorPin3, motorPin2, motorPin4);
-  STEPPER2 = AccelStepper(HALFSTEP, motorPin5, motorPin7, motorPin6, motorPin8);
+void setupStepper(int motor1Pins[], int motor2Pins[]) {
+  STEPPER1 = AccelStepper(HALFSTEP, motor1Pins[0], motor1Pins[2], motor1Pins[1], motor1Pins[3]);
+  STEPPER2 = AccelStepper(HALFSTEP, motor2Pins[0], motor2Pins[2], motor2Pins[1], motor2Pins[3]);
 
   delay(1000);
-  
-  STEPPER1.setMaxSpeed(stepperMaxSpeed);
-  STEPPER1.move(1);  // I found this necessary
-  STEPPER1.setSpeed(stepperSpeed);
 
-  STEPPER2.setMaxSpeed(stepperMaxSpeed);
-  STEPPER2.move(-1);  // I found this necessary
-  STEPPER2.setSpeed(stepperSpeed);
+  initializeStepper(&STEPPER1);
+  initializeStepper(&STEPPER2);  
 }
 
 void setupStepperDefault() {
@@ -61,19 +64,21 @@ void setupStepperDefault() {
 
   delay(1000);
   
-  STEPPER1.setMaxSpeed(stepperMaxSpeed);
-  STEPPER1.move(1);  // I found this necessary
-  STEPPER1.setSpeed(stepperSpeed);
-
-  STEPPER2.setMaxSpeed(stepperMaxSpeed);
-  STEPPER2.move(-1);  // I found this necessary
-  STEPPER2.setSpeed(stepperSpeed);
+  initializeStepper(&STEPPER1);
+  initializeStepper(&STEPPER2);  
 }
 
 
-void isMoveDone() {
+/*
+ * methods
+ */
 
+void initializeStepper(AccelStepper * stepper) {
+  (*stepper).setMaxSpeed(stepperMaxSpeed);
+  (*stepper).move(-1);  // I found this necessary
+  (*stepper).setSpeed(stepperSpeed);
 }
+
 
 
 
@@ -91,20 +96,21 @@ void executeMove() {
 }
 
 
+void moveStepper(AccelStepper *stepper, int target) {
+  (*stepper).move(target);
+  (*stepper).setSpeed(stepperSpeed);
+}
 
-void moveStepper1(int distance) {
+
+void moveStepper1(int target) {
   if (STEPS1 == 0) {
-    int target = distance;
-    STEPPER1.move(target);
-    STEPPER1.setSpeed(stepperSpeed);
+    moveStepper(&STEPPER1, target);
   }
 }
 
-void moveStepper2(int distance) {
+void moveStepper2(int target) {
   if (STEPS2 == 0) {
-    int target = distance;
-    STEPPER2.move(target);
-    STEPPER2.setSpeed(stepperSpeed);
+    moveStepper(&STEPPER2, target);
   }
 }
 
