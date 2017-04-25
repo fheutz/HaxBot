@@ -1,12 +1,13 @@
 #include <AccelStepper.h>
 #define HALFSTEP 8
 
-// motor pins
+// motor pins for left motor
 #define motorPin1  4     // IN1 on the ULN2003 driver 1
 #define motorPin2  5     // IN2 on the ULN2003 driver 1
 #define motorPin3  6     // IN3 on the ULN2003 driver 1
 #define motorPin4  7     // IN4 on the ULN2003 driver 1
 
+// motor pins for right motor
 #define motorPin5  8     // IN1 on the ULN2003 driver 2
 #define motorPin6  9     // IN2 on the ULN2003 driver 2
 #define motorPin7  10    // IN3 on the ULN2003 driver 2
@@ -52,7 +53,7 @@ void isMoveDone() {
 
 void executeMove() {
   STEPS1 = STEPPER1.distanceToGo();
-  STEPS2 = STEPPER1.distanceToGo();
+  STEPS2 = STEPPER2.distanceToGo();
   
   STEPPER1.runSpeedToPosition();
   STEPPER2.runSpeedToPosition();
@@ -60,6 +61,7 @@ void executeMove() {
   // Serial.print("steps needed: ");
   // Serial.println(STEPS1);
 }
+
 
 
 void moveStepper1(int distance) {
