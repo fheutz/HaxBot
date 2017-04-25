@@ -1,8 +1,10 @@
 #include "lib_stepper.h"
 
 void setup() {
-  //Serial.begin(9600);
-  setupStepper();
+  // setupStepperDefault();
+
+  short motorPins[8] = { 3, 5, 6, 7, 8, 9, 10, 11 };  
+  setupStepper(motorPins);
 
 }
 
