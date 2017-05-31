@@ -10,8 +10,8 @@ void setup() {
 }
 
 void loop() {
-  //moveForward(1000);
-  moveBackward(1000);
+  moveForward(1000);
+  //moveBackward(1000);
   //turnLeft(1000);
   //turnRight(1000);
 }
