@@ -48,7 +48,7 @@ void turnRight(int distance);
  * constructor(s)
  */
 
-void setupStepper(int motor1Pins[], int motor2Pins[]) {
+void setupStepper(short motor1Pins[], short motor2Pins[]) {
   STEPPER1 = AccelStepper(HALFSTEP, motor1Pins[0], motor1Pins[2], motor1Pins[1], motor1Pins[3]);
   STEPPER2 = AccelStepper(HALFSTEP, motor2Pins[0], motor2Pins[2], motor2Pins[1], motor2Pins[3]);
 
@@ -115,15 +115,15 @@ void moveStepper2(int target) {
 }
 
 void moveForward(int distance) {
-  moveStepper1(distance);
-  moveStepper2(-distance);
+  moveStepper1(-distance);
+  moveStepper2(distance);
   executeMove();
 }
 
 
 void moveBackward(int distance) {
-  moveStepper1(-distance);
-  moveStepper2(distance);
+  moveStepper1(distance);
+  moveStepper2(-distance);
   executeMove();
 }
 
