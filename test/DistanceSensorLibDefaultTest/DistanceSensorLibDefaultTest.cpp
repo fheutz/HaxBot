@@ -2,12 +2,7 @@
 #include <Wire.h>
 #include "DistanceSensorLib.h"
 
-
-#define TRIG_PIN 13
-#define ECHO_PIN 12
-
-
-DistanceSensor ds = DistanceSensor(TRIG_PIN, ECHO_PIN);
+DistanceSensor ds;
 uint16_t maxRange = 200;
 
 void setup() {
