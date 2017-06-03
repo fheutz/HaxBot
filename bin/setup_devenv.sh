@@ -8,20 +8,17 @@ ARDUINO_TAR_FILE=arduino-1.8.2-linux64.tar
 ARDUINO_DIR=arduino-1.8.2-linux64
 HEXBOT_REPO="https://github.com/fheutz/HaxBot.git"
 
-echo
-echo "INFO: install needed software / dependencies ..."
-apt-get install -y git
-
 
 echo
 echo "INFO: install arduino software ..."
-mkdir -p Arduino
-cd Arduino
-if [ ! -f ${ARDUINO_TAR_FILE} ]; then
+mkdir -p HaxBot-Arduino
+cd HaxBot-Arduino
+
+if [ ! -d ${ARDUINO_DIR}  -a  ! -f ${ARDUINO_TAR_FILE} ]; then
+	echo " -> download software ..."
 	wget -c https://downloads.arduino.cc/${ARDUINO_DL_FILE}
+	echo " -> extract software ..."
 	xz -d ${ARDUINO_DL_FILE}
-fi
-if [ ! -d ${ARDUINO_DIR} ]; then
 	tar xf ${ARDUINO_TAR_FILE}
 fi
 if [ -L arduino ]; then
@@ -38,6 +35,10 @@ if [ -d HaxBot ]; then
 else 
 	git clone ${HEXBOT_REPO}
 fi
+
+echo
+echo "INFO: pulling git submodules ..."
+git submodule update --init --recursive
 
 
 
