@@ -88,4 +88,6 @@ void Stepper::turnRight(int distance) {
   executeMove();
 }
 
-
+uint16_t Stepper::getDistanceToGo() {
+	return _STEPS1;
+}

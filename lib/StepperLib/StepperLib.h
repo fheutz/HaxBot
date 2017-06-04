@@ -35,6 +35,7 @@ class Stepper {
 		void moveBackward(int distance);
 		void turnLeft(int distance);
 		void turnRight(int distance);
+		uint16_t getDistanceToGo();
 
 	private:
 
@@ -45,12 +46,12 @@ class Stepper {
 		AccelStepper STEPPER1;
 		AccelStepper STEPPER2;
 		
-		int16_t _STEPS1 = 0;
-		int16_t _STEPS2 = 0;
+		uint16_t _STEPS1 = 0;
+		uint16_t _STEPS2 = 0;
 
 		//	CONSTANTS
-		int16_t _stepperSpeed = 1000;
-		int16_t _stepperMaxSpeed = 2000;
+		uint16_t _stepperSpeed = 1000;
+		uint16_t _stepperMaxSpeed = 2000;
 };
 
 
