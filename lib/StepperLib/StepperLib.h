@@ -1,5 +1,5 @@
-#ifndef _DISTANCE_SENSOR_LIB_
-#define _DISTANCE_SENSOR_LIB_
+#ifndef _STEPPER_LIB_
+#define _STEPPER_LIB_
 
 
 #include <Arduino.h>
@@ -19,7 +19,6 @@
 #define defaultMotorPin6  9     // IN2 on the ULN2003 driver 2
 #define defaultMotorPin7  10    // IN3 on the ULN2003 driver 2
 #define defaultMotorPin8  11    // IN4 on the ULN2003 driver 2
-
 
 class Stepper {
 
@@ -53,5 +52,6 @@ class Stepper {
 		int16_t _stepperSpeed = 1000;
 		int16_t _stepperMaxSpeed = 2000;
 };
+
 
 #endif
