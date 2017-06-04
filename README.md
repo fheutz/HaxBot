@@ -1,5 +1,7 @@
 # HaxBot
 
+<a href='https://travis-ci.org/sebdah/git-pylint-commit-hook'><img src='https://secure.travis-ci.org/bboortz/HaxBot.png?branch=master'></a>
+
 ## Setting up new environment
 
 * git clone https://github.com/fheutz/HaxBot.git
