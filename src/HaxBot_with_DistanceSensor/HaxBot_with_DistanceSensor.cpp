@@ -4,7 +4,7 @@
 #include <DistanceSensorLib.h>
 
 
-#define DEBUG 1
+// #define DEBUG 1
 #define FORWARD 0
 #define LEFT 1
 #define RIGHT 2
@@ -35,6 +35,8 @@ void setup() {
 
 
 void loop() {
+
+	// move robot
 	if (loopCount % 100 == 0) {
 		if (turn == LEFT) {
 			stepper->turnLeft(1000);
@@ -46,37 +48,27 @@ void loop() {
 	}
 
 
+	// detect obstacles
 	if (loopCount >= loopMaxCount) {
 		long distance = ds->getDistance();
+#ifdef DEBUG
 		Serial.print(distance);
 		Serial.println(" cm");
+#endif
 		if (distance == 0) {
 		} else if (distance < 20) {
 			turn = LEFT;
+#ifdef DEBUG
 			Serial.println("# turn left");
+#endif
 		} else {
 			turn = FORWARD;
+#ifdef DEBUG
 			Serial.println("# move forward");
+#endif
 		}
 		loopCount = 0;
 	}
-
-/*
-	if (loopCount >= loopMaxCount) {
-		Serial.print("# loop");
-		Serial.print(" - ");
-		Serial.print(loopCount);
-		long distance = ds->getDistance();
-		if (distance > maxRange) {
-			Serial.println("not in range!");
-		} else {
-			Serial.print(distance);
-			Serial.println(" cm");
-		}
-		loopCount = 0;
-	}
-	*/
-
 
 
 	loopCount++;
