@@ -5,9 +5,9 @@ DistanceSensor ds;
 uint16_t maxRange = 200;
 
 void setup() {
+	Serial.begin(115200);
 	Serial.println("### START TESTCASE ###");
 
-	Serial.begin(115200);
 	delay(1000);
 
 }
