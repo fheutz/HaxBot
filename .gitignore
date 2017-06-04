@@ -7,4 +7,10 @@ doc/
 debug.txt
 .ycm_extra_conf.pyc
 .ropeproject
-lib/AccelStepper
+arduino-1.8.2-linux64.tar.xz
+arduino-1.8.2-linux64.tar
+arduino-1.8.2/
+arduino
+avr-gcc
+lib/AccelStepper/
+lib/AccelStepper-1.57.zip

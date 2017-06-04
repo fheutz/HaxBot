@@ -17,21 +17,21 @@ ARDMK_DIR         = $(PROJECT_DIR)/Arduino-Makefile
 
 ### ARDUINO_DIR
 ### Path to the Arduino application and ressources directory.
-ARDUINO_DIR       = /usr/share/arduino
+ARDUINO_DIR       = $(PROJECT_DIR)/arduino
 
 ### USER_LIB_PATH
 ### Path to where the your project's libraries are stored.
 USER_LIB_PATH     :=  $(realpath $(PROJECT_DIR)/lib)
 
 ### BOARD_TAG & BOARD_SUB
-### For Arduino IDE 1.0.x
-### Only BOARD_TAG is needed. It must be set to the board you are currently using. (i.e uno, mega2560, etc.)
-# BOARD_TAG         = mega2560
-### For Arduino IDE 1.6.x
-### Both BOARD_TAG and BOARD_SUB are needed. They must be set to the board you are currently using. (i.e BOARD_TAG = uno, mega, etc. & BOARD_SUB = atmega2560, etc.)
-### Note: for the Arduino Uno, only BOARD_TAG is mandatory and BOARD_SUB can be equal to anything
-BOARD_TAG         = mega
-BOARD_SUB         = atmega2560
+### for arduino nano
+BOARD_TAG   = nano
+BOARD_SUB   = atmega328
+### for arduino uno
+#BOARD_TAG   = uno
+### for arduino mega
+#BOARD_TAG   = mega
+#BOARD_SUB  = atmega2560
 
 ### MONITOR_BAUDRATE
 ### It must be set to Serial baudrate value you are using.
@@ -39,11 +39,13 @@ MONITOR_BAUDRATE  = 115200
 
 ### AVR_TOOLS_DIR
 ### Path to the AVR tools directory such as avr-gcc, avr-g++, etc.
-AVR_TOOLS_DIR     = /usr
+#AVR_TOOLS_DIR     = /usr
 
 ### AVRDDUDE
 ### Path to avrdude directory.
-AVRDDUDE          = /usr/bin/avrdude
+AVRDDUDE     = /usr/bin/avrdude
+AVRDUDE_CONF = /etc/avrdude.conf
+#AVRDDUDE          = /home/benni/Arduino/avrdude-6.3
 
 ### CFLAGS_STD
 CFLAGS_STD        = -std=gnu11
@@ -62,7 +64,10 @@ endif
 
 ### MONITOR_PORT
 ### The port your board is connected to. Using an '*' tries all the ports and finds the right one.
-MONITOR_PORT      = /dev/tty.usbmodem*
+MONITOR_PORT      = /dev/ttyUSB0
+
+### ADUINO PORT
+ARDUINO_PORT = /dev/ttyUSB0
 
 ### don't touch this
 CURRENT_DIR       = $(shell basename $(CURDIR))

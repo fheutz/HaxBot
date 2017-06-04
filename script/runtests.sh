@@ -12,9 +12,9 @@ for dir in *; do
 
 		echo $CWD
 		cd $dir
+		pwd
 
-		cp $CWD/Makefile-CI.mk Makefile
-
+		make clean
 		make PROJECT_DIR=$CWD ARDUINO_DIR=$ARDUINO AVR_TOOLS_DIR=$AVR_GCC
 
 		if [[ $? -ne 0 ]]; then
@@ -39,9 +39,9 @@ for dir in *; do
 		echo "Compiling $dir..."
 
 		cd $dir
+		pwd
 
-		cp $CWD/Makefile-CI.mk Makefile
-
+		make clean
 		make PROJECT_DIR=$CWD ARDUINO_DIR=$ARDUINO AVR_TOOLS_DIR=$AVR_GCC
 
 		if [[ $? -ne 0 ]]; then

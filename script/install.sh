@@ -1,27 +1,76 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
-echo "Installing dependencies needed to build the sources and tests..."
+set -u
+set -e 
 
-ARDUINO_BASENAME="arduino-1.0.6"
-ARDUINO_FILE="$ARDUINO_BASENAME-linux64.tgz"
-ARDUINO_URL="http://arduino.cc/download.php?f=/$ARDUINO_FILE"
+ARDUINO_DL_FILE=arduino-1.8.2-linux64.tar.xz
+ARDUINO_TAR_FILE=arduino-1.8.2-linux64.tar
+ARDUINO_DIR=arduino-1.8.2
 
-AVR_GCC_BASENAME="arduino-1.5.8"
-AVR_GCC_FILE="$AVR_GCC_BASENAME-linux64.tgz"
-AVR_GCC_URL="http://arduino.cc/download.php?f=/$AVR_GCC_FILE"
 
-echo "Installing Arduino 1.0.6..."
 
-wget "$ARDUINO_URL" -O "$ARDUINO_FILE"
-tar -xzf "$ARDUINO_FILE"
-sudo mv "$ARDUINO_BASENAME/" "$ARDUINO"
+cd $CWD
 
-echo "Installing avr-gcc from Arduino 1.5.8..."
 
-wget "$AVR_GCC_URL" -O "$AVR_GCC_FILE"
-tar -xzf "$AVR_GCC_FILE"
-sudo mv "$AVR_GCC_BASENAME/hardware/tools/avr" "$AVR_GCC"
 
-echo "Installation of dependencies is complete, we are now going to run some tests..."
+echo
+echo
+echo "INFO: install arduino software ..."
+if [ ! -d ${ARDUINO_DIR}  -a  ! -f ${ARDUINO_TAR_FILE} ]; then
+	echo
+	echo " -> download software ..."
+	wget -c https://downloads.arduino.cc/${ARDUINO_DL_FILE}
+	echo
+	echo " -> extract software ..."
+	xz -d ${ARDUINO_DL_FILE}
+	tar xf ${ARDUINO_TAR_FILE}
 
+	if [ -L arduino ]; then
+		unlink arduino
+	fi
+	ln -s ${ARDUINO_DIR} arduino 
+
+	if [ -L $AVR_GCC ]; then
+		unlink arduino
+	fi
+	ln -s arduino/hardware/tools/avr $AVR_GCC
+fi
+
+
+
+echo
+echo
+echo "INFO: install libraries ..."
+cd lib
+
+if [ ! -d AccelStepper ]; then
+	echo
+	echo " -> AccelStepper ..."
+	wget http://www.airspayce.com/mikem/arduino/AccelStepper/AccelStepper-1.57.zip
+	unzip AccelStepper-1.57.zip
+fi
+
+cd ..
+
+
+
+echo
+echo
+echo "INFO: pulling git submodules ..."
+git submodule update --init --recursive
+
+
+
+echo
+echo
+echo "INFO: run tests ..."
 source "$SCRIPTS_DIR/runtests.sh"
+
+
+
+
+
+
+
+
+
