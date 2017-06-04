@@ -34,7 +34,8 @@ void loop() {
 	if (distance == 0) {
 		i = 0;
 	} else {
-		stepper->moveForward(distance);
+//		stepper->moveForward(distance);
+		stepper->executeMove();
 	}
 }
 
