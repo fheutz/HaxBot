@@ -5,7 +5,7 @@
 
 ### PROJECT_DIR
 ### This is the path to where you have created/cloned your project
-PROJECT_DIR       = /home/benni/Arduino/HaxBot
+PROJECT_DIR       = ../..
 
 ### AVR_GCC_VERSION
 ### Check if the version is equal or higher than 4.9
