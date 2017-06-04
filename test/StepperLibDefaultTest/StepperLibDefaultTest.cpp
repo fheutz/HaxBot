@@ -1,21 +1,20 @@
 #include <Arduino.h>
-#include "StepperLib.h"
+#include <AccelStepper.h>
+#include <StepperLib.h>
 
-Stepper stepper;
+Stepper *stepper;
 
 void setup() {
+	Serial.begin(115200);
 	Serial.println("### START TESTCASE ###");
 
-	Serial.begin(115200);
+	stepper = new Stepper;
 	delay(1000);
-
 }
 
 void loop() {
 
-	stepper.moveForward(1000);
-
-	delay(1000);
+	stepper->moveForward(10000);
 
 }
 

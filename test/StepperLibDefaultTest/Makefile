@@ -25,10 +25,10 @@ USER_LIB_PATH     :=  $(realpath $(PROJECT_DIR)/lib)
 
 ### BOARD_TAG & BOARD_SUB
 ### for arduino nano
-BOARD_TAG   = nano
-BOARD_SUB   = atmega328
+#BOARD_TAG   = nano
+#BOARD_SUB   = atmega328
 ### for arduino uno
-#BOARD_TAG   = uno
+BOARD_TAG   = uno
 ### for arduino mega
 #BOARD_TAG   = mega
 #BOARD_SUB  = atmega2560
@@ -64,10 +64,12 @@ endif
 
 ### MONITOR_PORT
 ### The port your board is connected to. Using an '*' tries all the ports and finds the right one.
-MONITOR_PORT      = /dev/ttyUSB0
+MONITOR_PORT      = /dev/ttyACM0
+#MONITOR_PORT      = /dev/ttyUSB0
 
 ### ADUINO PORT
-ARDUINO_PORT = /dev/ttyUSB0
+ARDUINO_PORT = /dev/ttyACM0
+#ARDUINO_PORT = /dev/ttyUSB0
 
 ### don't touch this
 CURRENT_DIR       = $(shell basename $(CURDIR))
@@ -78,7 +80,7 @@ CURRENT_DIR       = $(shell basename $(CURDIR))
 OBJDIR            = $(PROJECT_DIR)/bin/$(CURRENT_DIR)/$(BOARD_TAG)
 
 # ARDUINO_LIBS
-ARDUINO_LIBS = StepperLib AccelStepper
+#ARDUINO_LIBS = StepperLib AccelStepper
 
 ### path to Arduino.mk, inside the ARDMK_DIR, don't touch.
 include $(ARDMK_DIR)/Arduino.mk
