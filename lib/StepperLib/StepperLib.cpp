@@ -13,8 +13,6 @@ Stepper::Stepper() {
 	STEPPER1 = AccelStepper(HALFSTEP, defaultMotorPin1, defaultMotorPin3, defaultMotorPin2, defaultMotorPin4);
 	STEPPER2 = AccelStepper(HALFSTEP, defaultMotorPin5, defaultMotorPin7, defaultMotorPin6, defaultMotorPin8);
 
-	delay(1000);
-				
 	initializeStepper(&STEPPER1);
 	initializeStepper(&STEPPER2); 
 }
@@ -22,8 +20,6 @@ Stepper::Stepper() {
 Stepper::Stepper(short motor1Pins[], short motor2Pins[]) {
 	STEPPER1 = AccelStepper(HALFSTEP, motor1Pins[0], motor1Pins[2], motor1Pins[1], motor1Pins[3]);
 	STEPPER2 = AccelStepper(HALFSTEP, motor2Pins[0], motor2Pins[2], motor2Pins[1], motor2Pins[3]);
-
-	delay(1000);
 
 	initializeStepper(&STEPPER1);
 	initializeStepper(&STEPPER2); 
@@ -92,4 +88,6 @@ void Stepper::turnRight(int distance) {
   executeMove();
 }
 
-
+uint16_t Stepper::getDistanceToGo() {
+	return _STEPS1;
+}

@@ -64,12 +64,12 @@ endif
 
 ### MONITOR_PORT
 ### The port your board is connected to. Using an '*' tries all the ports and finds the right one.
-MONITOR_PORT      = /dev/ttyACM0
 #MONITOR_PORT      = /dev/ttyUSB0
+MONITOR_PORT      = /dev/ttyACM0
 
 ### ADUINO PORT
-ARDUINO_PORT = /dev/ttyACM0
 #ARDUINO_PORT = /dev/ttyUSB0
+ARDUINO_PORT = /dev/ttyACM0
 
 ### don't touch this
 CURRENT_DIR       = $(shell basename $(CURDIR))
@@ -78,6 +78,10 @@ CURRENT_DIR       = $(shell basename $(CURDIR))
 ### This is were you put the binaries you just compile using 'make'
 CURRENT_DIR       = $(shell basename $(CURDIR))
 OBJDIR            = $(PROJECT_DIR)/bin/$(CURRENT_DIR)/$(BOARD_TAG)
+
+# ARDUINO_LIBS
+#ARDUINO_LIBS = DistanceSensorLib StepperLib AccelStepper
+#ARDUINO_LIBS = StepperLib AccelStepper
 
 ### path to Arduino.mk, inside the ARDMK_DIR, don't touch.
 include $(ARDMK_DIR)/Arduino.mk
